@@ -11,7 +11,6 @@ const DateRange = ({
   dateInputStyle,
   ...props
 }) => {
-  console.log({ fromDate, toDate })
   const moment = require("moment")
   const [isOpen, setIsOpen] = useState(false)
 

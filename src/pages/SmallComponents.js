@@ -7,7 +7,6 @@ const SmallComponents = () => {
     fromDate: moment().subtract(2, "days")._d,
     toDate: moment().add(3, "days")._d,
   })
-  console.log({ dates })
   return (
     <div
       style={{
