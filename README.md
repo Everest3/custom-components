@@ -2,69 +2,31 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+This is a repository of collected custom react components.
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<img width="1680" alt="Screenshot 2022-08-20 at 8 03 32 PM" src="https://user-images.githubusercontent.com/46906305/185760782-ebb0a286-5c53-48fa-8dca-addee9ea3b76.png">
+Wrapper table for dev express grid-https://devexpress.github.io/devextreme-reactive/react/grid/docs/guides/getting-started/
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This wrapper component implements together different dev express gried features into one in order to make the table more easy to use and reusable.
+It includes by default
+-Filters
 
-### `npm test`
+-Pagination
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-Order
 
-### `npm run build`
+-Column visibility,
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-Custom column filters( TextInput, Select , DatePicker)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+-Custom column order(You need to specifiy the weights of each property)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+These components are uncontrolled by default,you just  need to pass the columns and data for the table to work.If you need these components to be 
+controlled you can pass down your state as props.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<img width="1680" alt="Screenshot 2022-08-20 at 8 03 00 PM" src="https://user-images.githubusercontent.com/46906305/185760620-2de5b8a2-04c2-46af-8d38-466f8ca2c858.png">
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Quick menu Date Range Picker.
