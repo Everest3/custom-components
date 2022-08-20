@@ -49,6 +49,7 @@ const GridPage = () => {
 
   //use storage is a custom hook to control the state and also to save the state in local storage,the only difference in use with useState
   //is that useStorage needs an unique key as a second parameter
+  //is used to save the columns that are hidden in local storage
   const [defaultHiddenColumnNames, setDefaultHiddenColumnNames] = useStorage(
     [],
     "grid-hidden-columns"
@@ -65,11 +66,7 @@ const GridPage = () => {
     Blue: 1,
     Green: 2,
   }
-  // console.log({ pagination })
-  console.log({ filters, searchValue })
-  console.log({ rows, columns })
 
-  console.log({ filters })
   return (
     <Table
       rows={rows}
@@ -78,17 +75,17 @@ const GridPage = () => {
       // showSearch={false}
       // showHideColumns={false}
 
-      //by default table needs only rows and columns,but if you need to control the state of the components you can pass down props below
+      //by default table needs only rows and columns,but if you need to controlled components,you can pass props below
 
       // defaultSorting={[{ columnName: "name", direction: "asc" }]}
-      customSorting={[
-        { columnName: "priority", weights: priorityWeights },
-        { columnName: "colors", weights: colorWeights },
-      ]}
+      // customSorting={[
+      //   { columnName: "priority", weights: priorityWeights },
+      //   { columnName: "colors", weights: colorWeights },
+      // ]}
       // pagination={pagination}
       // setPagination={setPagination}
-      filters={filters}
-      setFilters={setFilters}
+      // filters={filters}
+      // setFilters={setFilters}
       // defaultHiddenColumnNames={defaultHiddenColumnNames}
       // setDefaultHiddenColumnNames={setDefaultHiddenColumnNames}
       // searchValue={searchValue}
