@@ -2,20 +2,38 @@ import { generateRows } from "../demo-data/generator"
 import Table from "../components/Table/Table"
 import { useState } from "react"
 import useStorage from "../utils/hooks/useStorage"
-import {
-  Table as MaterialTable,
-  TableFilterRow,
-} from "@devexpress/dx-react-grid-material-ui"
-import { MenuItem, Select, TableCell } from "@mui/material"
 
 const GridPage = () => {
+  const priorityOptions = [
+    { value: "", label: "None" },
+    { value: "Low", label: "Low" },
+    { value: "Normal", label: "Normal" },
+    { value: "High", label: "High" },
+  ]
+
   const [rows] = useState(generateRows({ length: 25 }))
+
   const [columns] = useState([
-    { name: "name", title: "Name" },
+    {
+      name: "name",
+      title: "Name",
+      // filteringEnabled: false, //specify if filtering is enabled for this column
+    },
     { name: "gender", title: "Gender" },
     { name: "city", title: "City" },
+    {
+      name: "birthDate",
+      title: "Birthday",
+      filterType: "date",
+      // dateFormat: "DD/MM/YYYY",//you can specifiy date formats for date input,date format is in timestamp
+    },
     { name: "car", title: "Car" },
-    { name: "priority", title: "Priority", filterType: "select" },
+    {
+      name: "priority",
+      title: "Priority",
+      filterType: "select", //cell accepts filter types of select,date,by default is text input
+      selectOptions: priorityOptions,
+    },
     { name: "colors", title: "Colors" },
   ])
 
@@ -51,48 +69,12 @@ const GridPage = () => {
   console.log({ filters, searchValue })
   console.log({ rows, columns })
 
-  const priorityOptions = [
-    { value: "", label: "None" },
-    { value: "Low", label: "Low" },
-    { value: "Normal", label: "Normal" },
-    { value: "High", label: "High" },
-  ]
-
-  const SelectCell = (props) => {
-    const { filter, onFilter, column } = props
-
-    return (
-      <TableCell sx={{ width: "100%", p: 1 }}>
-        <Select
-          sx={{ display: "flex", height: 35 }}
-          value={filter ? filter.value : ""}
-          onChange={(e) =>
-            onFilter(e.target.value ? { value: e.target.value } : null)
-          }
-        >
-          {priorityOptions.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </Select>
-      </TableCell>
-    )
-  }
-
-  const FilterCell = (props) => {
-    const { filter, onFilter, column } = props
-    if (column.filterType === "select") {
-      return <SelectCell {...props} />
-    }
-    return <TableFilterRow.Cell {...props} />
-  }
-
+  console.log({ filters })
   return (
     <Table
       rows={rows}
       columns={columns}
-      showFilters={false}
+      // showFilters={false}
       // showSearch={false}
       // showHideColumns={false}
 
@@ -105,15 +87,13 @@ const GridPage = () => {
       ]}
       // pagination={pagination}
       // setPagination={setPagination}
-      // filters={filters}
-      // setFilters={setFilters}
+      filters={filters}
+      setFilters={setFilters}
       // defaultHiddenColumnNames={defaultHiddenColumnNames}
       // setDefaultHiddenColumnNames={setDefaultHiddenColumnNames}
       // searchValue={searchValue}
       // setSearchValue={setSearchValue}
-    >
-      <TableFilterRow cellComponent={FilterCell} />
-    </Table>
+    ></Table>
   )
 }
 
