@@ -68,29 +68,38 @@ const GridPage = () => {
   }
 
   return (
-    <Table
-      rows={rows}
-      columns={columns}
-      // showFilters={false}
-      // showSearch={false}
-      // showHideColumns={false}
+    <div
+      style={{
+        height: "100vh",
+        width: "75%",
+        height: "100%",
+        margin: "auto",
+      }}
+    >
+      <Table
+        rows={rows}
+        columns={columns}
+        // showFilters={false}
+        // showSearch={false}
+        // showHideColumns={false}
 
-      //by default table needs only rows and columns,but if you need to controlled components,you can pass props below
+        //by default table needs only rows and columns,but if you need to controlled components,you can pass props below
 
-      // defaultSorting={[{ columnName: "name", direction: "asc" }]}
-      // customSorting={[
-      //   { columnName: "priority", weights: priorityWeights },
-      //   { columnName: "colors", weights: colorWeights },
-      // ]}
-      // pagination={pagination}
-      // setPagination={setPagination}
-      // filters={filters}
-      // setFilters={setFilters}
-      // defaultHiddenColumnNames={defaultHiddenColumnNames}
-      // setDefaultHiddenColumnNames={setDefaultHiddenColumnNames}
-      // searchValue={searchValue}
-      // setSearchValue={setSearchValue}
-    ></Table>
+        // defaultSorting={[{ columnName: "name", direction: "asc" }]}
+        // customSorting={[
+        //   { columnName: "priority", weights: priorityWeights },
+        //   { columnName: "colors", weights: colorWeights },
+        // ]}
+        // pagination={pagination}
+        // setPagination={setPagination}
+        // filters={filters}
+        // setFilters={setFilters}
+        // defaultHiddenColumnNames={defaultHiddenColumnNames}
+        // setDefaultHiddenColumnNames={setDefaultHiddenColumnNames}
+        // searchValue={searchValue}
+        // setSearchValue={setSearchValue}
+      ></Table>
+    </div>
   )
 }
 
