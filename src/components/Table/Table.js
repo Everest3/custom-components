@@ -37,7 +37,9 @@ const Table = ({
   setPagination,
   customSorting,
   defaultSorting,
-  ...props
+  rows,
+  columns,
+  children,
 }) => {
   let columnExtensions = []
 
@@ -76,7 +78,7 @@ const Table = ({
 
   return (
     <Paper>
-      <Grid {...props}>
+      <Grid rows={rows} columns={columns}>
         <SortingState defaultSorting={defaultSorting} />
         {/* custom sorting */}
         <IntegratedSorting columnExtensions={columnExtensions} />
@@ -100,15 +102,12 @@ const Table = ({
         ) : (
           <PagingState defaultCurrentPage={0} defaultPageSize={10} />
         )}
-
         <IntegratedPaging />
-
         {showFilters && filters ? (
           <FilteringState filters={filters} onFiltersChange={setFilters} />
         ) : (
           <FilteringState />
         )}
-
         {showSearch &&
           (searchValue != null ? (
             <SearchState value={searchValue} onValueChange={setSearchValue} />
@@ -120,7 +119,6 @@ const Table = ({
             defaultHiddenColumnNames
           )}
         />
-
         <MaterialTable />
         <TableHeaderRow showSortingControls />
         {showFilters && <TableFilterRow />}
@@ -138,6 +136,7 @@ const Table = ({
         {showHideColumns && <ColumnChooser />}
         {/* contrrollet e shfletimit */}
         <PagingPanel pageSizes={pagination?.pageSizes ?? [5, 10, 15]} />
+        {children}
       </Grid>
     </Paper>
   )
