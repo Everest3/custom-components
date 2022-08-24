@@ -66,7 +66,7 @@ const GridPage = () => {
     Blue: 1,
     Green: 2,
   }
-
+console.log({filters})
   return (
     <div
       style={{

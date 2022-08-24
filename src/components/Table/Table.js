@@ -22,7 +22,7 @@ import {
   ColumnChooser,
 } from "@devexpress/dx-react-grid-material-ui"
 
-import { MenuItem, Select, TableCell } from "@mui/material"
+import { MenuItem, Select, TableCell, TextField } from "@mui/material"
 import DatePicker from "react-datepicker"
 import { FaCalendarAlt } from "react-icons/fa"
 import { IoClose } from "react-icons/io5"
@@ -52,10 +52,10 @@ const Table = ({
     (hiddenColumnNames) =>
       hiddenColumnNames?.map(
         (columnName) =>
-          ({
-            columnName,
-            predicate: () => false,
-          } ?? [])
+        ({
+          columnName,
+          predicate: () => false,
+        } ?? [])
       ),
     [defaultHiddenColumnNames]
   )
@@ -155,8 +155,11 @@ const SelectCell = (props) => {
 
   return (
     <TableCell sx={{ width: "100%", p: 1 }}>
-      <Select
+      <TextField
+        select
         sx={{ display: "flex", height: 35 }}
+        variant="standard"
+        size="medium"
         value={filter ? filter.value : ""}
         onChange={(e) =>
           onFilter(e.target.value ? { value: e.target.value } : null)
@@ -167,46 +170,39 @@ const SelectCell = (props) => {
             {option.label}
           </MenuItem>
         ))}
-      </Select>
+      </TextField>
     </TableCell>
   )
+}
+
+
+const InputComponent=({ defaultValue, inputRef, ...props })=> {
+  const [value, setValue] = React.useState(() => props.value || defaultValue);
+
+  const handleChange = event => {
+    setValue(event.target.value);
+    if (props.onChange) {
+      props.onChange(event);
+    }
+  };
+
+  return (
+      <input
+        ref={inputRef}
+        {...props}
+        onChange={handleChange}
+        value={value}
+      />
+  );
 }
 
 const DateCell = (props) => {
   const { filter, onFilter, column } = props
   const dateFormat = column?.dateFormat || "DD/MM/YYYY"
 
-  const DateInput = React.forwardRef((props, ref) => {
-    const { filter, onFilter, children } = props
-    return (
-      <button
-        ref={ref}
-        // disabled={props.i}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "10px 0px",
-          backgroundColor: "white",
-          border: "1px solid #ccc",
-          shadow: "none",
-          width: "100%",
-        }}
-        onClick={props.onClick}
-      >
-        <FaCalendarAlt />
-        <div style={{ margin: "0px 7px" }}>{children}</div>
-        {filter?.value && filter.value != "" && (
-          <IoClose
-            size={20}
-            onClick={() => {
-              onFilter({ value: "" })
-            }}
-          />
-        )}
-      </button>
-    )
-  })
+
+
+
   return (
     <TableCell
       sx={{
@@ -216,21 +212,22 @@ const DateCell = (props) => {
         height: 25,
       }}
     >
-      <DatePicker
-        format="dd/mm/yyyy"
-        selected={filter?.value ?? ""}
-        onChange={(date) => {
+      <TextField
+        type="date"
+        size="small"
+        variant="standard"
+        fullWidth
+        defaultValue={""}
+        value={filter?.value ?? ""}
+        InputProps={{
+          inputComponent: InputComponent
+        }}
+        onChange={(e) => {
+          const date=moment(e.target.value).format(dateFormat)
           onFilter({
-            value: date.setHours(2, 0, 0, 0),
+            value: date,
           })
         }}
-        customInput={
-          <DateInput filter={filter} onFilter={onFilter}>
-            {filter?.value && filter.value != ""
-              ? moment(filter?.value).format(dateFormat)
-              : ""}
-          </DateInput>
-        }
       />
     </TableCell>
   )
