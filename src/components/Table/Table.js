@@ -52,10 +52,10 @@ const Table = ({
     (hiddenColumnNames) =>
       hiddenColumnNames?.map(
         (columnName) =>
-        ({
-          columnName,
-          predicate: () => false,
-        } ?? [])
+          ({
+            columnName,
+            predicate: () => false,
+          } ?? [])
       ),
     [defaultHiddenColumnNames]
   )
@@ -175,34 +175,48 @@ const SelectCell = (props) => {
   )
 }
 
+const InputComponent = ({ defaultValue, inputRef, ...props }) => {
+  const [value, setValue] = React.useState(() => props.value || defaultValue)
 
-const InputComponent=({ defaultValue, inputRef, ...props })=> {
-  const [value, setValue] = React.useState(() => props.value || defaultValue);
-
-  const handleChange = event => {
-    setValue(event.target.value);
-    if (props.onChange) {
-      props.onChange(event);
+  const handleChange = (event) => {
+    // setValue(event.target.value)
+    if (props.onBlur) {
+      props.onBlur(event)
     }
-  };
+  }
+  console.log({ inputRef, props })
+
+  const onAccept = () => {
+    props.onFilter({
+      value,
+    })
+  }
 
   return (
-      <input
-        ref={inputRef}
-        {...props}
-        onChange={handleChange}
-        value={value}
-      />
-  );
+    <input
+      ref={inputRef}
+      {...props}
+      onChange={(event) => {
+        setValue(event.target.value)
+      }}
+      onBlur={() => {
+        onAccept()
+        props.onBlur()
+      }}
+      onFocus={() => {
+        onAccept()
+        props.onAccept()
+      }}
+    />
+  )
 }
 
 const DateCell = (props) => {
   const { filter, onFilter, column } = props
   const dateFormat = column?.dateFormat || "DD/MM/YYYY"
-
-
-
-
+  const value = filter?.value
+    ? moment(filter.value, dateFormat).format("YYYY-MM-DD")
+    : ""
   return (
     <TableCell
       sx={{
@@ -218,12 +232,12 @@ const DateCell = (props) => {
         variant="standard"
         fullWidth
         defaultValue={""}
-        value={filter?.value ?? ""}
-        InputProps={{
-          inputComponent: InputComponent
-        }}
+        value={value}
+        // InputProps={{
+        //   inputComponent: InputComponent
+        // }}
         onChange={(e) => {
-          const date=moment(e.target.value).format(dateFormat)
+          const date = moment(e.target.value).format(dateFormat)
           onFilter({
             value: date,
           })
