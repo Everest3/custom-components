@@ -1,0 +1,76 @@
+.sidebar{
+  width:300px;
+  height:100%;
+  background-color: #252b3b;
+  height: 100vh;
+  color:#d7e4ec;
+  padding:25px;
+}
+
+a{
+  text-decoration: none;
+  color:inherit;
+}
+
+.navlinks{
+  display: flex;
+  flex-direction: column;
+}
+
+.navlink{
+  padding:15px 0px;
+}
+
+.navlink:first-child{
+  padding-top: 30px;
+}
+
+.menu-container{
+  display:flex;
+  flex-direction: column;
+}
+
+.menu-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+
+/* .collapse-enter {
+  
+} */
+.collapse-enter-done {
+  transform: rotate(-180deg);
+  animation: collapse-menu-icon 100ms linear;
+
+}
+.collapse-exit {
+  transform: rotate(-180deg);
+
+
+}
+.collapse-exit-done {
+  transform: rotate(0deg);
+  animation: collapse-menu-icon-reverse 100ms linear;
+}
+
+
+@keyframes collapse-menu-icon {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(-180deg);
+  }
+}
+
+@keyframes collapse-menu-icon-reverse{
+  from {
+    transform: rotate(-180deg);
+}
+to {
+    transform: rotate(0deg);
+}
+}
