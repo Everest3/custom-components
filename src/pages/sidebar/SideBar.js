@@ -55,7 +55,7 @@ const SideBar = () => {
         return {...navlink,collapsed:!navlink.collapsed}
       }
       if(navlink?.children){
-        return deepTreeMutate(navlink.children,id)
+        return {...navlink,children:deepTreeMutate(navlink.children,id)}
       }
       return {...navlink}
     })
